@@ -1,7 +1,7 @@
 {
   "name": "custom-input",
   "version": "0.1.0",
-  "homepage": "https://moghani81.github.io/",
+  "homepage": "https://moghani81.github.io/detect/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
