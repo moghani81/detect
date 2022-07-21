@@ -1,6 +1,6 @@
 import "./App.css";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { message, Upload } from "antd";
+import { Col, Divider, message, Row, Upload } from "antd";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -65,7 +65,7 @@ function App() {
     const formData = new FormData();
     formData.append("file", file);
     axios
-      .post("http://127.0.0.1:8000/detect/", formData, {
+      .post("https://fastapi-kp5o7w.chabk.ir/detect/", formData, {
         onUploadProgress: (progressEvent) => {
           const percentCompleted = Math.round(
             (progressEvent.loaded * 100) / progressEvent.total
@@ -92,30 +92,43 @@ function App() {
   };
 
   return (
-    <div>
-      <Upload
-        name="avatar"
-        listType="picture-card"
-        className="avatar-uploader"
-        showUploadList={false}
-        customRequest={handleRequest}
-        beforeUpload={beforeUpload}
-        onChange={handleChange}
-      >
-        {imageUrl ? (
-          <img
-            src={imageUrl}
-            alt="avatar"
-            style={{
-              width: "100%",
-            }}
-          />
-        ) : (
-          uploadButton
-        )}
-      </Upload>
-      {imageData && <img src={imageData} alt="detected" />}
-    </div>
+    <>
+      <Divider>
+        <h1>Traffic light detection project</h1>
+      </Divider>
+      <Row justify="center">
+        <Col>
+          <Upload
+            name="avatar"
+            listType="picture-card"
+            className="avatar-uploader"
+            showUploadList={false}
+            customRequest={handleRequest}
+            beforeUpload={beforeUpload}
+            onChange={handleChange}
+          >
+            {imageUrl ? (
+              <img
+                src={imageUrl}
+                alt="avatar"
+                style={{
+                  width: "100%",
+                }}
+              />
+            ) : (
+              uploadButton
+            )}
+          </Upload>
+        </Col>
+      </Row>
+      <Row justify="center">
+        <Col span={12} style={{ background: "#000" }}>
+          {imageData && (
+            <img className="result" src={imageData} alt="detected" />
+          )}
+        </Col>
+      </Row>
+    </>
   );
 }
 
